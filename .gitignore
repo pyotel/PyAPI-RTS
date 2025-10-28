@@ -151,6 +151,13 @@ pyapi_rts/class_extractor/COMPONENTS/*
 pyapi_rts/class_extractor/TEST/*
 *.backup
 
+# Workshop generated files
+workshop/**/*.dfx
+workshop/**/*.dot
+workshop/**/*.png
+workshop/**/*.svg
+workshop/**/*_out.*
+
 build-docs
 .envrc
 .direnv
