@@ -1,79 +1,79 @@
 # PyAPI-RTS
 
-**A Python library to read and manipulate RSCAD draft files.**
+**RSCAD 드래프트 파일을 읽고 조작하는 Python 라이브러리**
 
-See <a href="examples/simple_example/simple_example.ipynb">examples/simple_example/simple_example.ipynb</a> for a short preview of the API or take a look into our <a href="docs/pyapi_rts.pdf">documentation</a>.
+API 미리보기는 <a href="examples/simple_example/simple_example.ipynb">examples/simple_example/simple_example.ipynb</a>를 참조하시거나 <a href="docs/pyapi_rts.pdf">문서</a>를 확인하세요.
 
-## Installation
+## 설치
 
-To install this project, perform the following steps:
+이 프로젝트를 설치하려면 다음 단계를 수행하세요:
 
-1. Clone the project
-2. `cd` into the cloned directory
-3. `pip install poetry`
-4. `poetry install`
+1. 프로젝트 클론
+2. 클론한 디렉토리로 `cd` 이동
+3. `pip install poetry` 실행
+4. `poetry install` 실행
 
-## Generate classes from RSCAD components
+## RSCAD 컴포넌트로부터 클래스 생성
 
-Before the first use of the project, the classes for the components in the RSCAD master library need to be generated.
+프로젝트를 처음 사용하기 전에, RSCAD 마스터 라이브러리의 컴포넌트에 대한 클래스를 생성해야 합니다.
 
-1. Copy the files from the `COMPONENTS` directory into `pyapi_rts/pyapi_rts/class_extractor/COMPONENTS`.
+1. `COMPONENTS` 디렉토리의 파일들을 `pyapi_rts/pyapi_rts/class_extractor/COMPONENTS`로 복사합니다.
 
-2. Run `poetry run python ./pyapi_rts/class_extractor/main.py`
+2. `poetry run python ./pyapi_rts/class_extractor/main.py` 실행
 
-Other options for the class generation:
+클래스 생성을 위한 추가 옵션:
 
-- \-d: Set to delete the output folder before new classes are generated
-- \-o: Set to include the OBSOLETE folder in the generation. Recommended if you use .dfx files converted from older versions
-- \-p: Set path to COMPONENTS folder
-- \-t: Set thread count used to parse the files. Default: 8 
+- \-d: 새 클래스 생성 전에 출력 폴더 삭제
+- \-o: OBSOLETE 폴더를 생성에 포함 (구버전에서 변환된 .dfx 파일 사용 시 권장)
+- \-p: COMPONENTS 폴더 경로 설정
+- \-t: 파일 파싱에 사용할 스레드 수 설정. 기본값: 8
 
-! The progress bar is not accurate due to optimizations applied during generation.
+! 생성 중 적용되는 최적화로 인해 진행률 표시줄이 정확하지 않습니다.
 
-## Run tests
+## 테스트 실행
 
 `poetry run pytest`
 
-## Workshop Projects
+## Workshop 프로젝트
 
-The `workshop/` directory contains example implementations and projects built with PyAPI-RTS:
+`workshop/` 디렉토리에는 PyAPI-RTS로 구축된 예제 구현 및 프로젝트가 포함되어 있습니다:
 
 ### IEEE 13 Node Test Feeder
 
-A complete implementation of the IEEE 13 bus distribution test system. This project demonstrates how to use PyAPI-RTS to build standard benchmark distribution systems.
+IEEE 13 버스 배전 테스트 시스템의 완전한 구현입니다. 이 프로젝트는 PyAPI-RTS를 사용하여 표준 벤치마크 배전 시스템을 구축하는 방법을 보여줍니다.
 
-**Location**: `workshop/ieee_13_bus/`
+**위치**: `workshop/ieee_13_bus/`
 
-**Features**:
-- Complete system configuration data (13 nodes, 12 line segments)
-- Automated builder class for RSCAD model generation
-- Load analysis and validation utilities
-- Network topology visualization
-- Comprehensive documentation
+**기능**:
+- 완전한 시스템 구성 데이터 (13개 노드, 12개 선로 구간)
+- RSCAD 모델 생성을 위한 자동화된 빌더 클래스
+- 부하 분석 및 검증 유틸리티
+- 네트워크 토폴로지 시각화
+- 포괄적인 문서
 
-**Quick Start**:
+**빠른 시작**:
 ```python
 from workshop.ieee_13_bus import IEEE13BusBuilder
 
 builder = IEEE13BusBuilder()
 print(builder.get_summary())
 
-# Generate .dfx file (requires RSCAD component classes)
+# .dfx 파일 생성 (RSCAD 컴포넌트 클래스 필요)
 # draft = builder.build()
 # draft.write_file("ieee_13_bus.dfx")
 ```
 
-**Documentation**: See `workshop/ieee_13_bus/README.md` for detailed information.
+**문서**: 자세한 정보는 `workshop/ieee_13_bus/README.md`를 참조하세요.
 
-**System Specifications**:
-- Nominal Voltage: 4.16 kV
-- Total Load: 3,466 kW + 2,102 kVAr
-- Components: 1 voltage regulator, 2 transformers, 8 spot loads, 2 capacitor banks
-- Mixed overhead and underground lines
-- Unbalanced loading with multiple load models (PQ, I, Z)
+**시스템 사양**:
+- 정격 전압: 4.16 kV
+- 총 부하: 3,466 kW + 2,102 kVAr
+- 구성요소: 전압 조정기 1개, 변압기 2개, 집중 부하 8개, 커패시터 뱅크 2개
+- 가공 및 지중 혼합 선로
+- 여러 부하 모델(PQ, I, Z)을 사용한 불평형 부하
 
-For more workshop projects and examples, see `workshop/README.md`.
+더 많은 workshop 프로젝트와 예제는 `workshop/README.md`를 참조하세요.
 
-## Citing
+## 인용
 
 > M. Weber, J. Enzinger, H. K. Çakmak, U. Kühnapfel and V. Hagenmeyer, "PyAPI-RTS: A Python-API for RSCAD Modeling," 2023 Open Source Modelling and Simulation of Energy Systems (OSMSES), Aachen, Germany, 2023, pp. 1-7, doi: [10.1109/OSMSES58477.2023.10089671](https://doi.org/10.1109/OSMSES58477.2023.10089671).
